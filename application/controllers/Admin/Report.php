@@ -52,7 +52,7 @@ class Report extends CI_Controller {
 			'priority' => $this->Priority_model->get_data(),
 			'status' => $this->Status_model->get_data(),
 		];
-		$this->form_validation->set_rules('firstname','firstname','required');
+		$this->form_validation->set_rules('subject','subject','required');
 		if ($this->form_validation->run() == false) {
 			$this->load->view('admin/header');
 			$this->load->view('admin/report/insert',$data);
@@ -67,6 +67,7 @@ class Report extends CI_Controller {
 			$this->load->library('upload', $config);
 
 			if ( ! $this->upload->do_upload('foto')){
+				echo var_dump($data);
 				$data['error'] = $this->upload->display_errors();
 				$this->load->view('admin/report/insert',$data);
 			}

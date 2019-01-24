@@ -106,13 +106,14 @@
       type: 'POST',
       data: formData,
       success: function (data) {
-        window.location.href = "<?php echo base_url('Admin/report'); ?>";
-       reload_table();
-     },
-     cache: false,
-     contentType: false,
-     processData: false
-   });
+        swal("Data Berhasil Masuk", {
+          icon: "success",
+        });
+      },
+      cache: false,
+      contentType: false,
+      processData: false
+    });
   });
 
    function readURL(input) {

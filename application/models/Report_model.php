@@ -46,7 +46,7 @@ class Report_model extends CI_Model {
 			'description' => $this->input->post('description'),
 			'image' => $foto,
 			'created_at' => date('Y-m-d H:m:s'),
-			'updated_at' => null,
+			'updated_at' => date('Y-m-d H:m:s'),
 		];
 
 		$insert = $this->db->insert($this->table,$set);
