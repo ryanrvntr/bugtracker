@@ -2,8 +2,8 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Table Report
+      <h1> 
+            Table Task
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -11,24 +11,23 @@
     </ol>
 </section>
 <section class="content container-fluid">
-    
+
     <div class="col-md-12">
       <div class="box">
         <div class="box-header">
-          <h3 class="box-title">Data Table With Full Features</h3>
-      </div>
-      <!-- /.box-header -->
-      <div class="box-body">
-        
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+
 
           <div class="row">
             <div class="col-sm-12">
-                <button type="button" class="btn btn-sm btn-primary btn-flat float-right mb-3" onclick="input_form();"><i class="fa fa-plus"></i> Tambah Data</button>
-                
+
+
                 <table id="product-table" class="table table-striped table-bordered" cellspacing="0" width="100%"></table>
             </div>
         </div>
-        
+
         <!-- /.box-body -->
     </div>
 </section>
@@ -42,7 +41,7 @@
     $(document).ready(() => {
         $('#product-table').DataTable( {
             "ajax": {
-                'url': "<?= base_url('Admin/'.$c_name.'/getdata') ?>",
+                'url': "<?= base_url('Department/'.$c_name.'/getdata') ?>",
             },
             "columns": [
             {
@@ -56,12 +55,24 @@
                 }
             },
             { 
-                "title" : "Name",
-                "data": "name" 
+                "title" : "Project Name",
+                "data": "project" 
             },
             { 
-                "title" : "Description",
-                "data": "description" 
+                "title" : "Subject",
+                "data": "subject" 
+            },
+            { 
+                "title" : "Message",
+                "data": "message" 
+            },
+            { 
+                "title" : "Status",
+                "data": "status" 
+            },
+            { 
+                "title" : "Priority",
+                "data": "priority" 
             },
             {
                 "title": "Actions",
@@ -71,9 +82,8 @@
                 "class": "text-center",
                 render: (data, type, row) => {
                     let ret = "";
-                    ret += ' <a href="#" onclick="info_form('+data+'); return false;" class="btn btn-xs btn-rounded btn-info"> <i class="fa fa-info-circle"></i> Lihat</a>';
-                    ret += ' <a href="#" onclick="update_form('+data+'); return false;" class="btn btn-xs btn-rounded btn-success"> <i class="fa fa-pencil"></i> Edit</a>';
-                    ret += ' <a href="#" onclick="delete_form('+data+')" class="btn btn-xs btn-rounded btn-danger"> <i class="fa fa-trash"></i> Hapus</a>';
+                    ret += ' <a href="#" onclick="info_form('+data+'); return false;" class="btn btn-xs btn-rounded btn-info"> Progress</a>';
+                    ret += ' <a href="#" onclick="update_form('+data+'); return false;" class="btn btn-xs btn-rounded btn-success"> Completed</a>';
                     return ret;
                 }
             }

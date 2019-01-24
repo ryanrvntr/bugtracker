@@ -12,6 +12,13 @@ class Users_model extends CI_Model {
     $this->db->from($this->table);
     return $this->db->get()->result();
   }
+  public function get_client($id)
+  {
+    $this->db->select('*');
+    $this->db->from($this->table);
+    $this->db->where('level_id',$id);
+    return $this->db->get()->result();
+  }
   
   public function get_id($id)
   {
