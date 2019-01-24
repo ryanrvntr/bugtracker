@@ -17,6 +17,17 @@ class Task_model extends CI_Model {
 
 	}
 
+	public function get_full_task()
+	{
+		$this->db->select("task.*, (project.name) as project, (report.subject) as subject, (status.name) as status, (priority.name) as priority");
+		$this->db->join('report', 'task.report_id = report.id'); 
+		$this->db->join('project', 'project_id = project.id');
+		$this->db->join('status', 'status_id = status.id');
+		$this->db->join('users', 'task.users_id = users.id');
+		$this->db->join('priority', 'task.priority_id = priority.id');
+		return $this->db->get('task')->result();
+	}
+
 	public function get_data()
 	{
 		$this->db->select('*');
