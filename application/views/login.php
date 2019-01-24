@@ -66,11 +66,12 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="<?php echo site_url('Login/proses_login')?>" method = "post">
+          <!-- <form action="<?php echo site_url('Login/proses_login')?>" method = "post"> -->
             <div class="form-group">
+              <?php echo form_open('login/proses_login'); ?>
               <?php echo $this->session->flashdata('msg');?>
               <label for="exampleInputEmail1">Email address</label>
-              <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" required="">
+              <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Password</label>
@@ -78,6 +79,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Login</button>
+            <?php echo form_close(); ?>
           </form>
         </div>
       </div>
@@ -95,16 +97,18 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
+          <?php echo form_open('login/proses_login'); ?>
+          <?php echo $this->session->flashdata('msg');?>
             <div class="form-group">
               <label for="exampleInputEmail1">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+              <input type="email" name = "email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Password</label>
-              <input  type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+               <input type="password" name="password" class="form-control" id="password" placeholder="Password">
             </div>
             <button type="submit" class="btn btn-primary">Login</button>
+            <?php echo form_close(); ?>
           </form>
         </div>
       </div>

@@ -40,9 +40,9 @@ class Login extends CI_Controller {
 			if ($level == 1) {
 				redirect('admin/project','refresh');
 			}elseif ($level == 2){
-				//redirect('admin/project','refresh');
+				// redirect('department/task','refresh');
 			}elseif ($level == 3) {
-				//redirect('Client','refresh');
+				// redirect('client/report','refresh');
 			}
 		}else{
 			echo $this->session->$this->session->set_flashdata('msg', 'Username and Password was Wrong'); redirect('Login','refresh');
