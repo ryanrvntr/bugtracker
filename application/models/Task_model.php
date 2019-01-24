@@ -12,7 +12,7 @@ class Task_model extends CI_Model {
 		$this->db->join('users', 'users_id = users.id');
 		$this->db->join('report', 'report_id = report.id');
 		$this->db->join('priority', 'task.priority_id = priority.id');
-		$this->db->order_by('task.id', 'desc');
+		$this->db->order_by('task.id', 'asc');
 		return $this->db->get('task')->result();
 
 	}
