@@ -11,7 +11,12 @@
     </ol>
 </section>
 <section class="content container-fluid">
-    
+    <div class="col-md-10"></div>
+    <div class="col-md-2">
+        <div class="center">
+            <a class="btn btn-primary center-block" href="<?php echo base_url('Admin/report/insert') ?>"><i class="fa fa-plus"></i> Tambah Data</a>
+        </div>
+    </div>
     <div class="col-md-12">
       <div class="box">
         <div class="box-header">
@@ -19,16 +24,17 @@
       </div>
       <!-- /.box-header -->
       <div class="box-body">
-        
+
 
           <div class="row">
             <div class="col-sm-12">
-                <button type="button" class="btn btn-sm btn-primary btn-flat float-right mb-3" onclick="input_form();"><i class="fa fa-plus"></i> Tambah Data</button>
-                
-                <table id="product-table" class="table table-striped table-bordered" cellspacing="0" width="100%"></table>
+                <div class="center">
+
+                </div>
+                <table id="product-table" class="table table-striped table-bordered dataTable table" cellspacing="0" width="100%"></table>
             </div>
         </div>
-        
+
         <!-- /.box-body -->
     </div>
 </section>
@@ -56,12 +62,27 @@
                 }
             },
             { 
-                "title" : "Name",
+                "title" : "Client name",
                 "data": "name" 
             },
             { 
-                "title" : "Description",
-                "data": "description" 
+                "title" : "Project name",
+                "data": "project" 
+            },
+            { 
+                "title" : "Subject Report",
+                "data": "subject" 
+            },            
+            { 
+                "title" : "Date of entry report/Date of report complete",
+                "data": "date" 
+            },            { 
+                "title" : "status",
+                "data": "status",
+            },            
+            { 
+                "title" : "Priority",
+                "data": "priority" 
             },
             {
                 "title": "Actions",
@@ -71,8 +92,7 @@
                 "class": "text-center",
                 render: (data, type, row) => {
                     let ret = "";
-                    ret += ' <a href="#" onclick="info_form('+data+'); return false;" class="btn btn-xs btn-rounded btn-info"> <i class="fa fa-info-circle"></i> Lihat</a>';
-                    ret += ' <a href="#" onclick="update_form('+data+'); return false;" class="btn btn-xs btn-rounded btn-success"> <i class="fa fa-pencil"></i> Edit</a>';
+                    ret += ' <a href="#" onclick="update_form('+data+'); return false;" class="btn btn-xs btn-rounded btn-success"> <i class="fa fa-pencil"></i> Update</a>';
                     ret += ' <a href="#" onclick="delete_form('+data+')" class="btn btn-xs btn-rounded btn-danger"> <i class="fa fa-trash"></i> Hapus</a>';
                     return ret;
                 }
@@ -99,16 +119,16 @@
     }
 
     function input_form() {
-        $('#modal').modal('show');
         $.ajax({
             url: "<?php echo base_url('Admin/'.$c_name.'/insert') ?>",
             data: null,
             success: function(data)
             {
-                $('#modal-content').html(data);
+                
             }
         });
     }
+    
     function update_form(id) {
         $('#modal').modal('show');
         $.ajax({
@@ -116,10 +136,11 @@
             data: null,
             success: function(data)
             {
-                $('#modal-content').html(data);
+                $('#modal-content').load('project/insert');
             }
         });
     }
+
     function delete_form(id) {
         swal({
           title: "Apakah anda yakin?",
@@ -153,7 +174,7 @@
     }
 </script>
 
-<!-- Primary table end -->
+<!-- Simary table end -->
 <!-- Dark table start -->
 <!-- <div class="col-12 mt-5">
     <div class="card">

@@ -13,6 +13,18 @@ class Report_model extends CI_Model {
 		return $this->db->get()->result();
 	}
 
+	public function get_data_full()
+	{
+		$this->db->select("report.*,concat(created_at,'/',updated_at) as date,concat(users.firstname,' ',users.lastname) as name, project.name as project, status.name as status, priority.name as priority");
+		$this->db->join('users', 'users_id = users.id');
+		$this->db->join('project', 'project_id = project.id');
+		$this->db->join('status', 'status_id = status.id');
+		$this->db->join('priority', 'priority_id = priority.id');
+		$this->db->order_by('report.id', 'asc');
+		return $this->db->get('report')->result();
+
+	}
+
 	public function get_id($id)
 	{
 		$this->db->select('*');
@@ -26,8 +38,15 @@ class Report_model extends CI_Model {
 		$db_debug = $this->db->db_debug;
 		$this->db->db_debug = FALSE;
 		$set = [
-			'name' => $this->input->post('name'),
+			'users_id' => $this->input->post('users'),
+			'project_id' => $this->input->post('project'),
+			'status_id' => $this->input->post('status'),
+			'priority_id' => $this->input->post('priority'),
+			'subject' => $this->input->post('subject'),
 			'description' => $this->input->post('description'),
+			'image' => $foto,
+			'created_at' => date('Y-m-d H:m:s'),
+			'updated_at' => date('Y-m-d H:m:s'),
 		];
 
 		$insert = $this->db->insert($this->table,$set);
