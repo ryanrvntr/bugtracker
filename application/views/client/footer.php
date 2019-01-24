@@ -1,6 +1,3 @@
-
-  <!-- /.content-wrapper -->
-
   <!-- Main Footer -->
   <footer class="main-footer">
     <!-- To the right -->
@@ -89,9 +86,6 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- REQUIRED JS SCRIPTS -->
-
-<!-- Bootstrap 3.3.7 -->
 <script src="<?php echo base_url('assets/dashboard') ?>/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url('assets/dashboard') ?>/dist/js/adminlte.min.js"></script>
