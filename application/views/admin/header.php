@@ -143,7 +143,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
         <!-- Optionally, you can add icons to the links -->
-        <li ><a href="#"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
+        <li ><a href="<?php echo base_url('Admin/Dashboard') ?>"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
         <li><a href="<?php echo base_url('Admin/Users') ?>"><i class="fa fa-link"></i> <span>User</span></a></li>
         <li><a href="<?php echo base_url('Admin/Project') ?>"><i class="fa fa-link"></i> <span>Project</span></a></li>
         <li><a href="<?php echo base_url('Admin/Report') ?>"><i class="fa fa-link"></i> <span>Report</span></a></li>

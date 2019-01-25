@@ -27,7 +27,7 @@ class Report_model extends CI_Model {
 
 	public function get_id($id)
 	{
-		$this->db->select('*');
+		$this->db->select('*, (select concat(users.firstname," ",users.lastname) from users where id=report.users_id) as name_users, (select image from users where id=report.users_id) as image_users');
 		$this->db->from($this->table);
 		$this->db->where('id',$id);
 		return $this->db->get()->row(0);

@@ -19,14 +19,10 @@
           <div class="box-body">
             <!-- text input -->
             <div class="form-group">
-              <label>clint name</label>
-              <select name="users" class="form-control">
-                <?php foreach ($client as $value): ?>
-                  <option value="<?php echo $value->id ?>"><?php echo $value->firstname ?></option>
-                <?php endforeach ?>
-              </select>
+              <label>client name</label>
+              <input type="hidden" name="users" value="<?php echo $this->session->userdata('id') ?>">
+              <input type="text" readonly value="<?php echo $this->session->userdata('username') ?>" class="form-control">
             </div>
-
             <!-- select -->
             <div class="form-group">
               <label>Project name</label>
@@ -39,11 +35,8 @@
 
             <div class="form-group">
               <label>status</label>
-              <select name="status" class="form-control">
-                <?php foreach ($status as $value): ?>
-                  <option value="<?php echo $value->id ?>"><?php echo $value->name ?></option>
-                <?php endforeach ?>
-              </select>
+              <input type="hidden" name="status" value="1">
+              <input type="text" class="form-control" value="Pending" readonly="">
             </div>
 
             <!-- select -->

@@ -22,7 +22,7 @@ class Task_model extends CI_Model {
 		$this->db->select("task.*, (project.name) as project, (report.subject) as subject, (status.name) as status, (priority.name) as priority");
 		$this->db->join('report', 'task.report_id = report.id'); 
 		$this->db->join('project', 'project_id = project.id');
-		$this->db->join('status', 'status_id = status.id');
+		$this->db->join('status', 'report.status_id = status.id');
 		$this->db->join('users', 'task.users_id = users.id');
 		$this->db->join('priority', 'task.priority_id = priority.id');
 		return $this->db->get('task')->result();
@@ -77,6 +77,19 @@ class Task_model extends CI_Model {
 
 		$this->db->where('id',$id);
 		$update = $this->db->update($this->table,$set);
+		$error = $this->db->error();
+		$this->db->db_debug = $db_debug;
+		return $error;
+	}
+
+	public function update_status($id,$status){
+		$db_debug = $this->db->db_debug;
+		$this->db->db_debug = FALSE;
+		$set = [
+			'status_id' => $status,
+		];
+		$this->db->where('id',$id);
+		$update = $this->db->update("report",$set);
 		$error = $this->db->error();
 		$this->db->db_debug = $db_debug;
 		return $error;

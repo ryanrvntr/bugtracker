@@ -149,7 +149,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
         <!-- Optionally, you can add icons to the links -->
-        <li><a href="#"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
+        <li><a href="<?php echo base_url('Department/Task') ?>"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

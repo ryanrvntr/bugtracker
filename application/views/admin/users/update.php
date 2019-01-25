@@ -57,6 +57,9 @@
           <?php echo $value->name ?></option>
         <?php endforeach ?>
       </select>
+      <script type="text/javascript">
+        $('select[name="level"]').val('<?php echo $data->level_id ?>')
+      </script>
     </div>
   </div>
   <div class="row mb-2">

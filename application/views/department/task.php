@@ -68,7 +68,18 @@
             },
             { 
                 "title" : "Status",
-                "data": "status" 
+                "data": "status",
+                render: (data,type,row) => {
+                    var ret = "";
+                    if (data == "pending") {
+                        ret = '<span class="label label-default">'+data+'</span>';
+                    }else if(data == "on progress"){
+                        ret = '<span class="label label-primary">'+data+'</span>';
+                    }else if(data == "completed"){
+                        ret = '<span class="label label-success">'+data+'</span>';
+                    }
+                    return ret;
+                } 
             },
             { 
                 "title" : "Priority",
@@ -77,15 +88,23 @@
             {
                 "title": "Actions",
                 "width" : "120px",
-                "data":'id',
+                'datastatus' : "status",
                 "visible":true,
                 "class": "text-center",
-                render: (data, type, row) => {
+                "data": (data, type, row) => {
+                    let isDisabledProgress = "";
+                    let isDisabledCompleted = "";
+                    if (data.status == 'on progress') {
+                        isDisabledProgress = "disabled";
+                    }else if (data.status == 'completed') {
+                        isDisabledProgress = "disabled";
+                        isDisabledCompleted = "disabled";
+                    }
                     let ret = "";
-                    ret += ' <a href="#" onclick="info_form('+data+'); return false;" class="btn btn-xs btn-rounded btn-info"> Progress</a>';
-                    ret += ' <a href="#" onclick="update_form('+data+'); return false;" class="btn btn-xs btn-rounded btn-success"> Completed</a>';
+                    ret += ' <button onclick="update_status('+data.report_id+',2); return false;" class="btn btn-xs btn-rounded btn-info" '+isDisabledProgress+'> progress</button>';
+                    ret += ' <button onclick="update_status('+data.report_id+',3); return false;" class="btn btn-xs btn-rounded btn-success" '+isDisabledCompleted+'> Completed</button>';
                     return ret;
-                }
+                },
             }
             ]
         } );
@@ -95,72 +114,18 @@
         $('#product-table').DataTable().ajax.reload(null,false);
     }
 
-    function info_form(id) {
-        $('#modal').modal('show');
+    function update_status(id,status){
 
         $.ajax({
-            url: "<?php echo base_url('Admin/'.$c_name.'/info/') ?>"+id,
+            url: "<?php echo base_url('Department/'.$c_name.'/update_status/') ?>"+id+"/"+status,
             data: null,
             success: function(data)
             {
-                $('#modal-content').html(data);
+                reload_table();
             }
         });
     }
 
-    function input_form() {
-        $('#modal').modal('show');
-        $.ajax({
-            url: "<?php echo base_url('Admin/'.$c_name.'/insert') ?>",
-            data: null,
-            success: function(data)
-            {
-                $('#modal-content').html(data);
-            }
-        });
-    }
-    function update_form(id) {
-        $('#modal').modal('show');
-        $.ajax({
-            url: "<?php echo base_url('Admin/'.$c_name.'/update/') ?>"+id,
-            data: null,
-            success: function(data)
-            {
-                $('#modal-content').html(data);
-            }
-        });
-    }
-    function delete_form(id) {
-        swal({
-          title: "Apakah anda yakin?",
-          text: "Setelah anda menghapus, data ini tidak dapat kembali",
-          icon: "warning",
-          buttons: true,
-          dangerMode: true,
-      })
-        .then((willDelete) => {
-          if (willDelete) {
-            $.ajax({
-                url: "<?php echo base_url('Admin/'.$c_name.'/delete/') ?>"+id,
-                data: null,
-                success: function(data)
-                {
-                    swal("Data berhasil di hapus", {
-                        icon: "success",
-                    });
-                    reload_table();
-                }
-            });
-            
-        } else {
-            swal("Data aman", {
-                icon: "info",
-            });
-        }
-    });
-
-
-    }
 </script>
 
 <!-- Primary table end -->

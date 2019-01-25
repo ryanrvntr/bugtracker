@@ -75,9 +75,10 @@
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+              <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
             </div>
 
+            <input type="hidden" name="allow_level" value="3">
             <button type="submit" class="btn btn-primary">Login</button>
             <?php echo form_close(); ?>
           </form>
@@ -101,12 +102,13 @@
           <?php echo $this->session->flashdata('msg');?>
             <div class="form-group">
               <label for="exampleInputEmail1">Email address</label>
-              <input type="email" name = "email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+              <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Password</label>
                <input type="password" name="password" class="form-control" id="password" placeholder="Password">
             </div>
+            <input type="hidden" name="allow_level" value="2">
             <button type="submit" class="btn btn-primary">Login</button>
             <?php echo form_close(); ?>
           </form>
@@ -136,6 +138,8 @@
           <label for="exampleInputPassword1">Password</label>
           <input type="password" name="password" class="form-control" id="password" placeholder="Password">
         </div>
+
+            <input type="hidden" name="allow_level" value="1">
         <button type="submit" class="btn btn-primary">Login</button>
         <?php echo form_close(); ?>
       </div>

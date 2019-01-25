@@ -3,10 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login_model extends CI_Model {
 
-	public function autentifikasi($email,$password)
+	public function autentifikasi($email,$password,$level)
 	{
 		$this->db->where('email', $email);
 		$this->db->where('password', $password);
+		$this->db->where('level_id', $level);
 		$query = $this->db->get('users');
 		return $query->result();
 

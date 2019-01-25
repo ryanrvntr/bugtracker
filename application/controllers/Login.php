@@ -20,16 +20,19 @@ class Login extends CI_Controller {
 		$name = "";$level = "";
 		$email = $this->input->post('email');
 		$password = $this->input->post('password');
-		$validate = $this->Login_model->autentifikasi($email, $password);
-		if($validate > 0){
+		$allow_level = $this->input->post('allow_level');
+		$validate = $this->Login_model->autentifikasi($email, $password,$allow_level);
+		if(count($validate) > 0){
 			foreach ($validate as $key) {
 				$name = $key->firstname;
 				$email = $key->email;
 				$level = $key->level_id;
 			}
+			$datausers = $validate[0];
 			
 			$sesdata = array(
-				'username' => $name,
+				'id' => $datausers->id,
+				'username' => $datausers->firstname." ".$datausers->lastname,
 				'email' => $email,
 				'level' => $level,
 				'logged_in' => TRUE
@@ -40,13 +43,20 @@ class Login extends CI_Controller {
 			if ($level == 1) {
 				redirect('admin/project','refresh');
 			}elseif ($level == 2){
-				// redirect('department/task','refresh');
+				redirect('department/task','refresh');
 			}elseif ($level == 3) {
-				// redirect('client/report','refresh');
+				redirect('client/report','refresh');
 			}
 		}else{
-			echo $this->session->$this->session->set_flashdata('msg', 'Username and Password was Wrong'); redirect('Login','refresh');
+			$this->session->set_flashdata('msg', 'Username and Password was Wrong'); 
+			redirect('Login','refresh');
 		}
+	}
+
+	public function logout()
+	{
+		$this->session->sess_destroy();
+		redirect('Login');
 	}
 
 }
