@@ -39,25 +39,8 @@ class DetailReport extends CI_Controller {
         $this->load->view('admin/footer');
       }
       else{
-        $data = array('upload_data' => $this->upload->data());
-        #dipindah di model
-        
-        $set = [
-          'message' => $this->input->post('message'),
-          'image' => $data['upload_data']['file_name'],
-          'report_id' => $id_report,
-          'created_at' => date('Y-m-d H:m:s'),
-        ];
-
-        if ($this->session->userdata('level') == '3') {
-          $set['users_id_client'] = $this->session->userdata('id');
-        }else if($this->session->userdata('level') == '1'){
-          $set['users_id_mod'] = $this->session->userdata('id');
-        }
-
-
-
-        $this->db->insert('report_detail',$set);
+        $data = array('upload_data' => $this->upload->data());        
+        $this->Report_model->insert_detail($data,$id_report);
         redirect('DetailReport/index/'.$id_report);
       }
     }

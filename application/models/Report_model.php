@@ -55,6 +55,26 @@ class Report_model extends CI_Model {
 		return $error;
 	}
 
+	public function insert_detail($data,$id_report)
+	{
+		$set = [
+          'message' => $this->input->post('message'),
+          'image' => $data['upload_data']['file_name'],
+          'report_id' => $id_report,
+          'created_at' => date('Y-m-d H:m:s'),
+        ];
+
+        if ($this->session->userdata('level') == '3') {
+          $set['users_id_client'] = $this->session->userdata('id');
+        }else if($this->session->userdata('level') == '1'){
+          $set['users_id_mod'] = $this->session->userdata('id');
+        }
+
+
+
+        $this->db->insert('report_detail',$set);
+	}
+
 	public function update_data($id,$foto = null)
 	{
 		$db_debug = $this->db->db_debug;

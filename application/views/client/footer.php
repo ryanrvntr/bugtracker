@@ -4,7 +4,7 @@
     <div class="pull-right hidden-xs">
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2019 <a href="#">IMAJIKU X PNM</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2019 <a href="#">IMAJIKU X POLINEMA</a>.</strong> All rights reserved.
   </footer>
 
   <!-- Control Sidebar -->
