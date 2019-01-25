@@ -32,6 +32,7 @@ class Task extends CI_Controller {
 		$data['data'] = $this->Task_model->get_full_task();
 		echo json_encode($data);
 	}
+
 	public function info($id)
 	{
 		$data = [
@@ -40,30 +41,12 @@ class Task extends CI_Controller {
 		];
 		$this->load->view('admin/task/info',$data);
 	}
-	public function insert()
-	{
-		$data = [
-			'c_name' => $this->c_name,
-			'priority' => $this->Priority_model->get_data(),
-			'users' => $this->Users_model->get_data(),
-			'report' => $this->Report_model->get_data(),
-		];
-		$this->form_validation->set_rules('message','message','required');
-		if ($this->form_validation->run() == false) {
-			$this->load->view('admin/task/insert',$data);
-		}else{
-			$this->load->view('admin/task/insert',$data);
-			$error = $this->Task_model->insert_data();
-			if ($error['code'] == 0) {
-				echo '<script>swal("Berhasil", "Data berhasil ditambahkan", "success");</script>';
-			}else{
 
-				echo '<script>swal("Gagal", "'.$error['message'].'", "error");</script>';
-			}
-		}
+	public function update_status($id,$status){
+		
+		$this->Task_model->update_status($id,$status);
+		 
 	}
-
-
 
 	public function update($id)
 	{
@@ -91,11 +74,6 @@ class Task extends CI_Controller {
 		}
 	}
 
-
-	public function delete($id)
-	{
-		$this->Task_model->delete_data($id);
-	}
 }
 
 /* End of file Task.php */

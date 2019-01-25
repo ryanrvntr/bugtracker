@@ -81,6 +81,14 @@
             },            { 
                 "title" : "telp",
                 "data": "telp" 
+            },            { 
+                "title" : "Image",
+                "data": "image",
+                render: (data,type,row) => {
+                    ret = "";
+                    ret += '<img src="<?php echo base_url('uploads/users/') ?>'+data+'" width="150px">'
+                    return ret;
+                } 
             },
             {
                 "title": "Actions",

@@ -2,8 +2,8 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1> 
-            Table Task
+      <h1>
+        Table Report
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -11,20 +11,27 @@
     </ol>
 </section>
 <section class="content container-fluid">
-
+    <div class="col-md-10"></div>
+    <div class="col-md-2">
+        <div class="center">
+            <a class="btn btn-primary center-block" href="<?php echo base_url('Client/report/insert') ?>"><i class="fa fa-plus"></i> Tambah Data</a>
+        </div>
+    </div>
     <div class="col-md-12">
       <div class="box">
         <div class="box-header">
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
+          <h3 class="box-title">Data Table With Full Features</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
 
 
           <div class="row">
             <div class="col-sm-12">
+                <div class="center">
 
-
-                <table id="product-table" class="table table-striped table-bordered" cellspacing="0" width="100%"></table>
+                </div>
+                <table id="product-table" class="table table-striped table-bordered dataTable table" cellspacing="0" width="100%"></table>
             </div>
         </div>
 
@@ -41,7 +48,7 @@
     $(document).ready(() => {
         $('#product-table').DataTable( {
             "ajax": {
-                'url': "<?= base_url('Department/'.$c_name.'/getdata') ?>",
+                'url': "<?= base_url('Client/'.$c_name.'/getdata') ?>",
             },
             "columns": [
             {
@@ -55,32 +62,24 @@
                 }
             },
             { 
-                "title" : "Project Name",
+                "title" : "Client name",
+                "data": "name" 
+            },
+            { 
+                "title" : "Project name",
                 "data": "project" 
             },
             { 
-                "title" : "Subject",
+                "title" : "Subject Report",
                 "data": "subject" 
-            },
+            },            
             { 
-                "title" : "Message",
-                "data": "message" 
-            },
-            { 
-                "title" : "Status",
+                "title" : "Date of entry report/Date of report complete",
+                "data": "date" 
+            },            { 
+                "title" : "status",
                 "data": "status",
-                render: (data,type,row) => {
-                    var ret = "";
-                    if (data == "pending") {
-                        ret = '<span class="label label-default">'+data+'</span>';
-                    }else if(data == "on progress"){
-                        ret = '<span class="label label-primary">'+data+'</span>';
-                    }else if(data == "completed"){
-                        ret = '<span class="label label-success">'+data+'</span>';
-                    }
-                    return ret;
-                } 
-            },
+            },            
             { 
                 "title" : "Priority",
                 "data": "priority" 
@@ -88,23 +87,16 @@
             {
                 "title": "Actions",
                 "width" : "120px",
-                'datastatus' : "status",
+                "data":'id',
                 "visible":true,
                 "class": "text-center",
-                "data": (data, type, row) => {
-                    let isDisabledProgress = "";
-                    let isDisabledCompleted = "";
-                    if (data.status == 'on progress') {
-                        isDisabledProgress = "disabled";
-                    }else if (data.status == 'completed') {
-                        isDisabledProgress = "disabled";
-                        isDisabledCompleted = "disabled";
-                    }
+                render: (data, type, row) => {
                     let ret = "";
-                    ret += ' <button onclick="update_status('+data.report_id+',2); return false;" class="btn btn-xs btn-rounded btn-info" '+isDisabledProgress+'> progress</button>';
-                    ret += ' <button onclick="update_status('+data.report_id+',3); return false;" class="btn btn-xs btn-rounded btn-success" '+isDisabledCompleted+'> Completed</button>';
+                    // ret += ' <a href="#" onclick="update_form('+data+'); return false;" class="btn btn-xs btn-rounded btn-success"> <i class="fa fa-pencil"></i> Update</a>';
+                    // ret += ' <a href="#" onclick="delete_form('+data+')" class="btn btn-xs btn-rounded btn-danger"> <i class="fa fa-trash"></i> Hapus</a>';
+                    ret += ' <a href="<?php echo base_url('DetailReport/index/') ?>'+data+'" class="btn btn-xs btn-rounded btn-primary"> <i class="fa fa-info-circle"></i> Detail</a>';
                     return ret;
-                },
+                }
             }
             ]
         } );
@@ -114,21 +106,78 @@
         $('#product-table').DataTable().ajax.reload(null,false);
     }
 
-    function update_status(id,status){
+    function info_form(id) {
+        $('#modal').modal('show');
 
         $.ajax({
-            url: "<?php echo base_url('Department/'.$c_name.'/update_status/') ?>"+id+"/"+status,
+            url: "<?php echo base_url('Client/'.$c_name.'/info/') ?>"+id,
             data: null,
             success: function(data)
             {
-                reload_table();
+                $('#modal-content').html(data);
             }
         });
     }
 
+    function input_form() {
+        $.ajax({
+            url: "<?php echo base_url('Client/'.$c_name.'/insert') ?>",
+            data: null,
+            success: function(data)
+            {
+                
+            }
+        });
+    }
+
+
+    
+    /*function update_form(id) {
+        $('#modal').modal('show');
+        $.ajax({
+            url: "<?php echo base_url('Client/'.$c_name.'/update/') ?>"+id,
+            data: null,
+            success: function(data)
+            {
+                $('#modal-content').load('project/insert');
+            }
+        });
+    }*/
+
+   /* function delete_form(id) {
+        swal({
+          title: "Apakah anda yakin?",
+          text: "Setelah anda menghapus, data ini tidak dapat kembali",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+      })
+        .then((willDelete) => {
+          if (willDelete) {
+            $.ajax({
+                url: "<?php echo base_url('Client/'.$c_name.'/delete/') ?>"+id,
+                data: null,
+                success: function(data)
+                {
+                    swal("Data berhasil di hapus", {
+                        icon: "success",
+                    });
+                    reload_table();
+                }
+            });
+            
+        } else {
+            swal("Data aman", {
+                icon: "info",
+            });
+        }
+    });
+
+
+    }*/
 </script>
 
-<!-- Primary table end -->
+<!-- Simary table end -->
 <!-- Dark table start -->
 <!-- <div class="col-12 mt-5">
     <div class="card">
