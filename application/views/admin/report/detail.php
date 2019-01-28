@@ -21,7 +21,7 @@
           <div class="user-block">
             <img class="img-circle" src="<?php echo base_url('uploads/users/'.$report->image_users) ?>" alt="User Image">
             <span class="username"><a href="#"><?php echo $report->name_users ?></a></span>
-            <span class="description">Shared publicly - 7:30 PM Today</span>
+            <span class="description">Shared publicly -<?php echo $report->created_at ?></span>
           </div>
           <!-- /.user-block -->
 
@@ -44,7 +44,7 @@
       <?php foreach ($this->db->get('report_detail')->result() as $key => $value): ?>
       <?php if ($value->users_id_mod != null): ?>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 pull-right">
             <div class="panel panel-default">
               <div class="panel-heading">
 
@@ -62,7 +62,7 @@
 
       <?php if ($value->users_id_client != null): ?>
         <div class="row">
-          <div class="col-md-6 pull-right">
+          <div class="col-md-6">
             <div class="panel panel-default">
               <div class="panel-heading">
                 <?php echo $this->db->where('id',$value->users_id_client)->get('users')->row(0)->firstname ?>
