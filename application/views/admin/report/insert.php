@@ -106,9 +106,8 @@
       type: 'POST',
       data: formData,
       success: function (data) {
-        swal("Data Berhasil Masuk", {
-          icon: "success",
-        });
+         $('#form#formdata')[0].reset();
+        $('#ngantok').html(data);
       },
       cache: false,
       contentType: false,
@@ -144,3 +143,6 @@
     }
   });
 </script>
+<div id="ngantok">
+  
+</div>

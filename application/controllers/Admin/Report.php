@@ -61,26 +61,25 @@ class Report extends CI_Controller {
 			$config['upload_path'] = './uploads/report/';
 			$config['allowed_types'] = 'gif|jpg|png';
 			$config['max_size']  = '2000';
-			$config['max_width']  = '1024';
-			$config['max_height']  = '768';
-
 			$this->load->library('upload', $config);
 
 			if ( ! $this->upload->do_upload('foto')){
-				echo var_dump($data);
 				$data['error'] = $this->upload->display_errors();
 				$this->load->view('admin/report/insert',$data);
 			}
 			else{
 				$upload_data = $this->upload->data();
-				$this->load->view('admin/report/insert',$data);
+
 				$error = $this->Report_model->insert_data($upload_data['file_name']);
+				$msg = "";
 				if ($error['code'] == 0) {
-					echo '<script>swal("Berhasil", "Data berhasil ditambahkan", "success");</script>';
+					$msg =  '<script>swal("Berhasil", "Data berhasil ditambahkan", "success");</script>';
 				}else{
 
-					echo '<script>swal("Gagal", "'.$error['message'].'", "error");</script>';
+					$msg =  '<script>swal("Gagal", "'.$error['message'].'", "error");</script>';
 				}
+				echo $msg;
+				
 			}
 		}
 	}

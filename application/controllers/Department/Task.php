@@ -45,7 +45,13 @@ class Task extends CI_Controller {
 	public function update_status($id,$status){
 		
 		$this->Task_model->update_status($id,$status);
-		 
+		 $set_log = [
+		 	'status_id' => $status,
+		 	'report_id' => $id,
+		 	'created_at' => $this->db->where('id',$id)->get('report')->row(0)->created_at,
+		 	'updated_at' => date('Y-m-d H:i:s'),
+		 ];
+		 $this->db->insert('report_log',$set_log);
 	}
 
 	public function update($id)

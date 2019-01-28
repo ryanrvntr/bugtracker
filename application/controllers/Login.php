@@ -35,6 +35,7 @@ class Login extends CI_Controller {
 				'username' => $datausers->firstname." ".$datausers->lastname,
 				'email' => $email,
 				'level' => $level,
+				'image' => $datausers->image,
 				'logged_in' => TRUE
 			);
 

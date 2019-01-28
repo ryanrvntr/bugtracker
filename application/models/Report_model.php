@@ -33,7 +33,7 @@ class Report_model extends CI_Model {
 		return $this->db->get()->row(0);
 	}
 
-	public function insert_data($foto)
+	public function insert_data($foto = null)
 	{
 		$db_debug = $this->db->db_debug;
 		$this->db->db_debug = FALSE;
@@ -44,10 +44,12 @@ class Report_model extends CI_Model {
 			'priority_id' => $this->input->post('priority'),
 			'subject' => $this->input->post('subject'),
 			'description' => $this->input->post('description'),
-			'image' => $foto,
 			'created_at' => date('Y-m-d H:m:s'),
 			'updated_at' => date('Y-m-d H:m:s'),
 		];
+		if ($foto != null) {
+			$set['image'] = $foto;
+		}
 
 		$insert = $this->db->insert($this->table,$set);
 		$error = $this->db->error();
@@ -59,10 +61,13 @@ class Report_model extends CI_Model {
 	{
 		$set = [
           'message' => $this->input->post('message'),
-          'image' => $data['upload_data']['file_name'],
           'report_id' => $id_report,
           'created_at' => date('Y-m-d H:m:s'),
         ];
+
+        if ($data != null) {
+        	$set['image'] = $data['upload_data']['file_name'];
+        }
 
         if ($this->session->userdata('level') == '3') {
           $set['users_id_client'] = $this->session->userdata('id');

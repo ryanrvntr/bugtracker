@@ -94,7 +94,7 @@
                     let ret = "";
                     // ret += ' <a href="#" onclick="update_form('+data+'); return false;" class="btn btn-xs btn-rounded btn-success"> <i class="fa fa-pencil"></i> Update</a>';
                     // ret += ' <a href="#" onclick="delete_form('+data+')" class="btn btn-xs btn-rounded btn-danger"> <i class="fa fa-trash"></i> Hapus</a>';
-                    ret += ' <a href="<?php echo base_url('DetailReport/index/') ?>'+data+'" class="btn btn-xs btn-rounded btn-primary"> <i class="fa fa-info-circle"></i> Detail</a>';
+                    ret += ' <a href="<?php echo base_url('Client/DetailReport/index/') ?>'+data+'" class="btn btn-xs btn-rounded btn-primary"> <i class="fa fa-info-circle"></i> Detail</a>';
                     return ret;
                 }
             }
